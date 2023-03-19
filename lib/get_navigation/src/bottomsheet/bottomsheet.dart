@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../get.dart';
 import '../router_report.dart';
 
@@ -21,9 +20,8 @@ class GetModalBottomSheetRoute<T> extends PopupRoute<T> {
     RouteSettings? settings,
     this.enterBottomSheetDuration = const Duration(milliseconds: 250),
     this.exitBottomSheetDuration = const Duration(milliseconds: 200),
-    this.curve,
   }) : super(settings: settings) {
-    RouterReportManager.instance.reportCurrentRoute(this);
+    RouterReportManager.reportCurrentRoute(this);
   }
   final bool? isPersistent;
   final WidgetBuilder? builder;
@@ -39,12 +37,11 @@ class GetModalBottomSheetRoute<T> extends PopupRoute<T> {
   // final String name;
   final Duration enterBottomSheetDuration;
   final Duration exitBottomSheetDuration;
-  final Curve? curve;
   // remove safearea from top
   final bool removeTop;
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 700);
+  Duration get transitionDuration => Duration(milliseconds: 700);
 
   @override
   bool get barrierDismissible => isDismissible;
@@ -59,16 +56,8 @@ class GetModalBottomSheetRoute<T> extends PopupRoute<T> {
 
   @override
   void dispose() {
-    RouterReportManager.instance.reportRouteDispose(this);
+    RouterReportManager.reportRouteDispose(this);
     super.dispose();
-  }
-
-  @override
-  Animation<double> createAnimation() {
-    if (curve != null) {
-      return CurvedAnimation(curve: curve!, parent: _animationController!.view);
-    }
-    return _animationController!.view;
   }
 
   @override

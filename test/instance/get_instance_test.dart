@@ -12,7 +12,7 @@ class Mock {
   }
 }
 
-abstract class MyController with GetLifeCycleMixin {}
+abstract class MyController extends GetLifeCycle {}
 
 class DisposableController extends MyController {}
 
@@ -29,7 +29,12 @@ class Api implements Service {
 }
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  test('Get.putAsync test', () async {
+    await Get.putAsync<String>(Mock.test);
+    expect('test', Get.find<String>());
+    Get.reset();
+  });
+
   test('Get.put test', () async {
     final instance = Get.put<Controller>(Controller());
     expect(instance, Get.find<Controller>());
@@ -101,8 +106,7 @@ void main() {
 
     expect(Get.find<Controller>().count, 1);
     Get.delete<Controller>();
-    expect(
-        () => Get.find<Controller>(), throwsA(const m.TypeMatcher<String>()));
+    expect(() => Get.find<Controller>(), throwsA(m.TypeMatcher<String>()));
     Get.reset();
   });
 
@@ -113,7 +117,7 @@ void main() {
     expect(ct1.count, 1);
     ct1 = Get.find<Controller>();
     expect(ct1.count, 1);
-    Get.reload<Controller>();
+    GetInstance().reload<Controller>();
     ct1 = Get.find<Controller>();
     expect(ct1.count, 0);
     Get.reset();
@@ -161,9 +165,9 @@ void main() {
 
     test('Get.delete test with disposable controller', () async {
       // Get.put(DisposableController());
-      expect(Get.delete<DisposableController>(), true);
+      expect(await Get.delete<DisposableController>(), true);
       expect(() => Get.find<DisposableController>(),
-          throwsA(const m.TypeMatcher<String>()));
+          throwsA(m.TypeMatcher<String>()));
     });
 
     test('Get.put test after delete with disposable controller and init check',
@@ -193,7 +197,7 @@ void main() {
     });
 
     test('tagged temporary', () async {
-      const tag = 'tag';
+      final tag = 'tag';
       Get.put(DisposableController(), tag: tag);
       Get.replace<DisposableController>(Controller(), tag: tag);
       final instance = Get.find<DisposableController>(tag: tag);
@@ -202,7 +206,7 @@ void main() {
     });
 
     test('tagged permanent', () async {
-      const tag = 'tag';
+      final tag = 'tag';
       Get.put(DisposableController(), permanent: true, tag: tag);
       Get.replace<DisposableController>(Controller(), tag: tag);
       final instance = Get.find<DisposableController>(tag: tag);
@@ -211,7 +215,7 @@ void main() {
     });
 
     test('a generic parent type', () async {
-      const tag = 'tag';
+      final tag = 'tag';
       Get.put<MyController>(DisposableController(), permanent: true, tag: tag);
       Get.replace<MyController>(Controller(), tag: tag);
       final instance = Get.find<MyController>(tag: tag);

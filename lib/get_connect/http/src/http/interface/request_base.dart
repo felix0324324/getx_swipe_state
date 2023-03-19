@@ -2,7 +2,7 @@ import '../../request/request.dart';
 import '../../response/response.dart';
 
 /// Abstract interface of [HttpRequestImpl].
-abstract class IClient {
+abstract class HttpRequestBase {
   /// Sends an HTTP [Request].
   Future<Response<T>> send<T>(Request<T> request);
 

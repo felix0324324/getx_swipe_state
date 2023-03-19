@@ -6,7 +6,7 @@ import 'routes/app_pages.dart';
 import 'shared/logger/logger_utils.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,11 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
       enableLog: true,
       logWriterCallback: Logger.write,
-      initialRoute: AppPages.INITIAL,
+      // initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       locale: TranslationService.locale,
       fallbackLocale: TranslationService.fallbackLocale,
@@ -29,27 +29,27 @@ class MyApp extends StatelessWidget {
 
 /// Nav 2 snippet
 // void main() {
-//   runApp(const MyApp());
+//   runApp(MyApp());
 // }
 
 // class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
+//   MyApp({Key? key}) : super(key: key);
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return GetMaterialApp(
+//     return GetMaterialApp.router(
 //       getPages: [
 //         GetPage(
 //             participatesInRootNavigator: true,
 //             name: '/first',
-//             page: () => const First()),
+//             page: () => First()),
 //         GetPage(
 //           name: '/second',
-//           page: () => const Second(),
+//           page: () => Second(),
 //         ),
 //         GetPage(
 //           name: '/third',
-//           page: () => const Third(),
+//           page: () => Third(),
 //         ),
 //       ],
 //       debugShowCheckedModeBanner: false,
@@ -58,32 +58,26 @@ class MyApp extends StatelessWidget {
 // }
 
 // class First extends StatelessWidget {
-//   const First({Key? key}) : super(key: key);
-
 //   @override
 //   Widget build(BuildContext context) {
-//     print('First rebuild');
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: const Text('page one'),
+//         title: Text('page one'),
 //         leading: IconButton(
-//           icon: const Icon(Icons.more),
+//           icon: Icon(Icons.more),
 //           onPressed: () {
-//             print('THEME CHANGED');
 //             Get.changeTheme(
-//                 Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+//                 context.isDarkMode ? ThemeData.light() : ThemeData.dark());
 //           },
 //         ),
 //       ),
 //       body: Center(
-//         child: SizedBox(
+//         child: Container(
 //           height: 300,
 //           width: 300,
 //           child: ElevatedButton(
-//             onPressed: () {
-//               Get.toNamed('/second?id=123');
-//             },
-//             child: const Text('next screen'),
+//             onPressed: () {},
+//             child: Text('next screen'),
 //           ),
 //         ),
 //       ),
@@ -92,22 +86,19 @@ class MyApp extends StatelessWidget {
 // }
 
 // class Second extends StatelessWidget {
-//   const Second({Key? key}) : super(key: key);
-
 //   @override
 //   Widget build(BuildContext context) {
-//     print('second rebuild');
 //     return Scaffold(
 //       appBar: AppBar(
 //         title: Text('page two ${Get.parameters["id"]}'),
 //       ),
 //       body: Center(
-//         child: SizedBox(
+//         child: Container(
 //           height: 300,
 //           width: 300,
 //           child: ElevatedButton(
 //             onPressed: () {},
-//             child: const Text('next screen'),
+//             child: Text('next screen'),
 //           ),
 //         ),
 //       ),
@@ -116,22 +107,20 @@ class MyApp extends StatelessWidget {
 // }
 
 // class Third extends StatelessWidget {
-//   const Third({Key? key}) : super(key: key);
-
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       backgroundColor: Colors.red,
 //       appBar: AppBar(
-//         title: const Text('page three'),
+//         title: Text('page three'),
 //       ),
 //       body: Center(
-//         child: SizedBox(
+//         child: Container(
 //           height: 300,
 //           width: 300,
 //           child: ElevatedButton(
 //             onPressed: () {},
-//             child: const Text('go to first screen'),
+//             child: Text('go to first screen'),
 //           ),
 //         ),
 //       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
-
 import 'utils/wrapper.dart';
 
 void main() {
@@ -10,16 +9,16 @@ void main() {
       Wrapper(child: Container()),
     );
 
-    await tester.pump();
-
-    Get.bottomSheet(Wrap(
-      children: <Widget>[
-        ListTile(
-          leading: const Icon(Icons.music_note),
-          title: const Text('Music'),
-          onTap: () {},
-        ),
-      ],
+    Get.bottomSheet(Container(
+      child: Wrap(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.music_note),
+            title: Text('Music'),
+            onTap: () {},
+          ),
+        ],
+      ),
     ));
 
     await tester.pumpAndSettle();
@@ -32,25 +31,21 @@ void main() {
       Wrapper(child: Container()),
     );
 
-    await tester.pump();
-
-    Get.bottomSheet(Wrap(
-      children: <Widget>[
-        ListTile(
-          leading: const Icon(Icons.music_note),
-          title: const Text('Music'),
-          onTap: () {},
-        ),
-      ],
+    Get.bottomSheet(Container(
+      child: Wrap(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.music_note),
+            title: Text('Music'),
+            onTap: () {},
+          ),
+        ],
+      ),
     ));
-
-    await tester.pumpAndSettle();
 
     expect(Get.isBottomSheetOpen, true);
 
     Get.back();
-    await tester.pumpAndSettle();
-
     expect(Get.isBottomSheetOpen, false);
 
     // expect(() => Get.bottomSheet(Container(), isScrollControlled: null),

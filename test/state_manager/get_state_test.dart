@@ -15,11 +15,11 @@ void main() {
                 '${controller.counter}',
               ),
               TextButton(
-                child: const Text("increment"),
+                child: Text("increment"),
                 onPressed: () => controller.increment(),
               ),
               TextButton(
-                child: const Text("incrementWithId"),
+                child: Text("incrementWithId"),
                 onPressed: () => controller.incrementWithId(),
               ),
               GetBuilder<Controller>(

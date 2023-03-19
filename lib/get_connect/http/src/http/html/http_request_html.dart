@@ -1,6 +1,5 @@
 import 'dart:async';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+import 'dart:html' as html;
 
 import '../../certificates/certificates.dart';
 import '../../exceptions/exceptions.dart';
@@ -9,8 +8,8 @@ import '../../response/response.dart';
 import '../interface/request_base.dart';
 import '../utils/body_decoder.dart';
 
-/// A `dart:html` implementation of `IClient`.
-class HttpRequestImpl implements IClient {
+/// A `dart:html` implementation of `HttpRequestBase`.
+class HttpRequestImpl implements HttpRequestBase {
   HttpRequestImpl({
     bool allowAutoSignedCert = true,
     List<TrustedCertificate>? trustedCertificates,
@@ -19,7 +18,7 @@ class HttpRequestImpl implements IClient {
   });
 
   /// The currently active XHRs.
-  final _xhrs = <HttpRequest>{};
+  final _xhrs = <html.HttpRequest>{};
 
   ///This option requires that you submit credentials for requests
   ///on different sites. The default is false
@@ -32,9 +31,9 @@ class HttpRequestImpl implements IClient {
   @override
   Future<Response<T>> send<T>(Request<T> request) async {
     var bytes = await request.bodyBytes.toBytes();
-    HttpRequest xhr;
+    html.HttpRequest xhr;
 
-    xhr = HttpRequest()
+    xhr = html.HttpRequest()
       ..timeout = timeout?.inMilliseconds
       ..open(request.method, '${request.url}', async: true); // check this
 
@@ -47,11 +46,11 @@ class HttpRequestImpl implements IClient {
 
     var completer = Completer<Response<T>>();
     xhr.onLoad.first.then((_) {
-      var blob = xhr.response as Blob? ?? Blob([]);
-      var reader = FileReader();
+      var blob = xhr.response as html.Blob? ?? html.Blob([]);
+      var reader = html.FileReader();
 
       reader.onLoad.first.then((_) async {
-        var bodyBytes = (reader.result as List<int>).toStream();
+        var bodyBytes = BodyBytesStream.fromBytes(reader.result as List<int>);
 
         final stringBody =
             await bodyBytesToString(bodyBytes, xhr.responseHeaders);

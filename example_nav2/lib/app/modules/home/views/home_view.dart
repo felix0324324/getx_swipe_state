@@ -5,47 +5,42 @@ import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetRouterOutlet.builder(
-      routerDelegate: Get.nestedKey(Routes.home),
-      builder: (context) {
-        final delegate = context.navigation;
+      builder: (context, delegate, currentRoute) {
         //This router outlet handles the appbar and the bottom navigation bar
-        final currentLocation = context.location;
+        final currentLocation = currentRoute?.location;
         var currentIndex = 0;
-        if (currentLocation.startsWith(Routes.products) == true) {
+        if (currentLocation?.startsWith(Routes.PRODUCTS) == true) {
           currentIndex = 2;
         }
-        if (currentLocation.startsWith(Routes.profile) == true) {
+        if (currentLocation?.startsWith(Routes.PROFILE) == true) {
           currentIndex = 1;
         }
         return Scaffold(
           body: GetRouterOutlet(
-            initialRoute: Routes.dashboard,
-            anchorRoute: Routes.home,
-
-            //delegate: Get.nestedKey(Routes.HOME),
-            // key: Get.nestedKey(Routes.HOME),
+            initialRoute: Routes.DASHBOARD,
+            // anchorRoute: Routes.HOME,
+            key: Get.nestedKey(Routes.HOME),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (value) {
               switch (value) {
                 case 0:
-                  delegate.toNamed(Routes.home);
+                  delegate.toNamed(Routes.HOME);
                   break;
                 case 1:
-                  delegate.toNamed(Routes.profile);
+                  delegate.toNamed(Routes.PROFILE);
                   break;
                 case 2:
-                  delegate.toNamed(Routes.products);
+                  delegate.toNamed(Routes.PRODUCTS);
                   break;
                 default:
               }
             },
-            items: const [
+            items: [
               // _Paths.HOME + [Empty]
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),

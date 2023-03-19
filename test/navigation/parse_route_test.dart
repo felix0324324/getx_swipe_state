@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/parse_route.dart';
 
 void main() {
   test('Parse Page with children', () {
@@ -64,7 +65,7 @@ void main() {
     tree.addRoute(pageTree);
 
     // tree.addRoute(pageTree);
-    const searchRoute = '/city/work/office/pen';
+    final searchRoute = '/city/work/office/pen';
     final match = tree.matchRoute(searchRoute);
     expect(match, isNotNull);
     expect(match.route!.name, searchRoute);
@@ -120,7 +121,7 @@ void main() {
     //   tree.addRoute(p);
     // }
 
-    const searchRoute = '/city/work/office/pen';
+    final searchRoute = '/city/work/office/pen';
     final match = tree.matchRoute(searchRoute);
     expect(match, isNotNull);
     expect(match.route!.name, searchRoute);
@@ -166,6 +167,7 @@ void main() {
   testWidgets(
     'params in url by parameters',
     (tester) async {
+      print("Iniciando test");
       await tester.pumpWidget(GetMaterialApp(
         initialRoute: '/first/juan',
         getPages: [

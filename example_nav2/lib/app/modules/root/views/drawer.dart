@@ -19,18 +19,18 @@ class DrawerWidget extends StatelessWidget {
             color: Colors.red,
           ),
           ListTile(
-            title: const Text('Home'),
+            title: Text('Home'),
             onTap: () {
-              Get.toNamed(Routes.home);
+              Get.rootDelegate.toNamed(Routes.HOME);
               //to close the drawer
 
               Navigator.of(context).pop();
             },
           ),
           ListTile(
-            title: const Text('Settings'),
+            title: Text('Settings'),
             onTap: () {
-              Get.toNamed(Routes.settings);
+              Get.rootDelegate.toNamed(Routes.SETTINGS);
               //to close the drawer
 
               Navigator.of(context).pop();
@@ -38,7 +38,7 @@ class DrawerWidget extends StatelessWidget {
           ),
           if (AuthService.to.isLoggedInValue)
             ListTile(
-              title: const Text(
+              title: Text(
                 'Logout',
                 style: TextStyle(
                   color: Colors.red,
@@ -46,7 +46,7 @@ class DrawerWidget extends StatelessWidget {
               ),
               onTap: () {
                 AuthService.to.logout();
-                Get.toNamed(Routes.login);
+                Get.rootDelegate.toNamed(Routes.LOGIN);
                 //to close the drawer
 
                 Navigator.of(context).pop();
@@ -54,14 +54,14 @@ class DrawerWidget extends StatelessWidget {
             ),
           if (!AuthService.to.isLoggedInValue)
             ListTile(
-              title: const Text(
+              title: Text(
                 'Login',
                 style: TextStyle(
                   color: Colors.blue,
                 ),
               ),
               onTap: () {
-                Get.toNamed(Routes.login);
+                Get.rootDelegate.toNamed(Routes.LOGIN);
                 //to close the drawer
 
                 Navigator.of(context).pop();

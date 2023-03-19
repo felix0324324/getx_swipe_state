@@ -5,8 +5,6 @@ import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,16 +13,16 @@ class ProfileView extends GetView<ProfileController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               'ProfileView is working',
               style: TextStyle(fontSize: 20),
             ),
-            const Hero(
+            Hero(
               tag: 'heroLogo',
-              child: FlutterLogo(),
+              child: const FlutterLogo(),
             ),
             MaterialButton(
-              child: const Text('Show a test dialog'),
+              child: Text('Show a test dialog'),
               onPressed: () {
                 //shows a dialog
                 Get.defaultDialog(
@@ -34,15 +32,14 @@ class ProfileView extends GetView<ProfileController> {
               },
             ),
             MaterialButton(
-              child: const Text('Show a test dialog in Home router outlet'),
+              child: Text('Show a test dialog in Home router outlet'),
               onPressed: () {
                 //shows a dialog
 
                 Get.defaultDialog(
                   title: 'Test Dialog In Home Outlet !!',
                   barrierDismissible: true,
-                  id: Routes.home,
-                  // navigatorKey: Get.nestedKey(Routes.HOME),
+                  navigatorKey: Get.nestedKey(Routes.HOME),
                 );
               },
             )

@@ -1,3 +1,4 @@
+// TODO: resolve platform/desktop by JS browser agent.
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 

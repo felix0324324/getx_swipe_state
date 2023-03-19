@@ -3,7 +3,7 @@ import '../../request/request.dart';
 import '../../response/response.dart';
 import '../interface/request_base.dart';
 
-class HttpRequestImpl extends IClient {
+class HttpRequestImpl extends HttpRequestBase {
   HttpRequestImpl({
     bool allowAutoSignedCert = true,
     List<TrustedCertificate>? trustedCertificates,

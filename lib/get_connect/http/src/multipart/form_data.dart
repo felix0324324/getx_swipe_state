@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-
 import '../request/request.dart';
 import '../utils/utils.dart';
 import 'multipart_file.dart';
@@ -9,7 +8,7 @@ import 'multipart_file.dart';
 class FormData {
   FormData(Map<String, dynamic> map) : boundary = _getBoundary() {
     map.forEach((key, value) {
-      if (value == null) return;
+      if (value == null) return null;
       if (value is MultipartFile) {
         files.add(MapEntry(key, value));
       } else if (value is List<MultipartFile>) {
@@ -25,9 +24,9 @@ class FormData {
   static const int _maxBoundaryLength = 70;
 
   static String _getBoundary() {
-    final newRandom = Random();
+    final _random = Random();
     var list = List<int>.generate(_maxBoundaryLength - GET_BOUNDARY.length,
-        (_) => boundaryCharacters[newRandom.nextInt(boundaryCharacters.length)],
+        (_) => boundaryCharacters[_random.nextInt(boundaryCharacters.length)],
         growable: false);
     return '$GET_BOUNDARY${String.fromCharCodes(list)}';
   }

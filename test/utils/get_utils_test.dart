@@ -8,10 +8,12 @@ class TestClass {
 class EmptyClass {}
 
 void main() {
-  dynamic newId(dynamic e) => e;
+  dynamic _id(dynamic e) => e;
+
+  Null _test;
 
   test('null isNullOrBlank should be true for null', () {
-    expect(GetUtils.isNullOrBlank(null), true);
+    expect(GetUtils.isNullOrBlank(_test), true);
   });
 
   test('isNullOrBlank should be false for unsupported types', () {
@@ -38,8 +40,8 @@ void main() {
   });
 
   test('isNullOrBlank should validate iterables', () {
-    expect(GetUtils.isNullOrBlank([].map(newId)), true);
-    expect(GetUtils.isNullOrBlank([1].map(newId)), false);
+    expect(GetUtils.isNullOrBlank([].map(_id)), true);
+    expect(GetUtils.isNullOrBlank([1].map(_id)), false);
   });
 
   test('isNullOrBlank should validate lists', () {
@@ -67,8 +69,8 @@ void main() {
   group('GetUtils.isLength* functions', () {
     test('isLengthEqualTo should validate iterable lengths', () {
       // iterables should cover list and set
-      expect(GetUtils.isLengthEqualTo([].map(newId), 0), true);
-      expect(GetUtils.isLengthEqualTo([1, 2].map(newId), 2), true);
+      expect(GetUtils.isLengthEqualTo([].map(_id), 0), true);
+      expect(GetUtils.isLengthEqualTo([1, 2].map(_id), 2), true);
 
       expect(GetUtils.isLengthEqualTo({}, 0), true);
       expect(GetUtils.isLengthEqualTo({1: 1, 2: 1}, 2), true);
@@ -81,9 +83,9 @@ void main() {
 
     test('isLengthGreaterOrEqual should validate lengths', () {
       // iterables should cover list and set
-      expect(GetUtils.isLengthGreaterOrEqual([].map(newId), 0), true);
-      expect(GetUtils.isLengthGreaterOrEqual([1, 2].map(newId), 2), true);
-      expect(GetUtils.isLengthGreaterOrEqual([1, 2].map(newId), 1), true);
+      expect(GetUtils.isLengthGreaterOrEqual([].map(_id), 0), true);
+      expect(GetUtils.isLengthGreaterOrEqual([1, 2].map(_id), 2), true);
+      expect(GetUtils.isLengthGreaterOrEqual([1, 2].map(_id), 1), true);
 
       expect(GetUtils.isLengthGreaterOrEqual({}, 0), true);
       expect(GetUtils.isLengthGreaterOrEqual({1: 1, 2: 1}, 1), true);
@@ -97,9 +99,9 @@ void main() {
 
     test('isLengthLessOrEqual should validate lengths', () {
       // iterables should cover list and set
-      expect(GetUtils.isLengthLessOrEqual([].map(newId), 0), true);
-      expect(GetUtils.isLengthLessOrEqual([1, 2].map(newId), 2), true);
-      expect(GetUtils.isLengthLessOrEqual([1, 2].map(newId), 1), false);
+      expect(GetUtils.isLengthLessOrEqual([].map(_id), 0), true);
+      expect(GetUtils.isLengthLessOrEqual([1, 2].map(_id), 2), true);
+      expect(GetUtils.isLengthLessOrEqual([1, 2].map(_id), 1), false);
 
       expect(GetUtils.isLengthLessOrEqual({}, 0), true);
       expect(GetUtils.isLengthLessOrEqual({1: 1, 2: 1}, 1), false);

@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -22,7 +20,7 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.add),
+            icon: Icon(Icons.add),
             onPressed: () {
               Get.snackbar('title', 'message');
             },
@@ -38,53 +36,52 @@ class HomeView extends GetView<HomeController> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 100,
                   ),
                   Text(
                     'total_confirmed'.tr,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 30,
                     ),
                   ),
                   Text(
                     '${state!.global.totalConfirmed}',
-                    style: const TextStyle(
-                        fontSize: 45, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
                   Text(
                     'total_deaths'.tr,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 30,
                     ),
                   ),
                   Text(
                     '${state.global.totalDeaths}',
-                    style: const TextStyle(
-                        fontSize: 45, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      textStyle: const TextStyle(color: Colors.black),
-                      side: const BorderSide(
+                      textStyle: TextStyle(color: Colors.black),
+                      side: BorderSide(
                         color: Colors.deepPurple,
                         width: 3,
                       ),
-                      shape: const StadiumBorder(),
+                      shape: StadiumBorder(),
                     ),
                     onPressed: () async {
-                      //await Navigation  Get.rootDelegate.toNamed('/home/country');
-                      Get.toNamed('/home/country');
+                      final data =
+                          await Get.rootDelegate.toNamed('/home/country');
+                      print('DATA: $data');
                     },
                     child: Text(
                       'fetch_country'.tr,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -92,17 +89,17 @@ class HomeView extends GetView<HomeController> {
                   ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      textStyle: const TextStyle(color: Colors.black),
-                      side: const BorderSide(
+                      textStyle: TextStyle(color: Colors.black),
+                      side: BorderSide(
                         color: Colors.deepPurple,
                         width: 3,
                       ),
-                      shape: const StadiumBorder(),
+                      shape: StadiumBorder(),
                     ),
                     onPressed: () {
-                      Get.updateLocale(const Locale('pt', 'BR'));
+                      Get.updateLocale(Locale('pt', 'BR'));
                     },
-                    child: const Text(
+                    child: Text(
                       'Update language to Portuguese',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
